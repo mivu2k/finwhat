@@ -1,0 +1,20 @@
+[Unit]
+Description=ExpenseChat API
+After=network-online.target mysql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=expensechat
+WorkingDirectory=/opt/expensechat
+EnvironmentFile=/opt/expensechat/.env
+ExecStart=/usr/bin/node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning server/index.ts
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
